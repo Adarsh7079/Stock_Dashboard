@@ -1,6 +1,6 @@
 const basePath = "https://finnhub.io/api/v1";
 
-export const searchSymbol = async (query) => {
+export const searchSymbol= async (query) => {
   const url = `${basePath}/search?q=${query}&token=${process.env.REACT_APP_API_KEY}`;
   const response = await fetch(url);
 
@@ -37,7 +37,6 @@ export const fetchQuote = async (stockSymbol) => {
 
   return await response.json();
 };
-
 export const fetchHistoricalData = async (
   stockSymbol,
   resolution,
@@ -45,13 +44,17 @@ export const fetchHistoricalData = async (
   to
 ) => {
   const url = `${basePath}/stock/candle?symbol=${stockSymbol}&resolution=${resolution}&from=${from}&to=${to}&token=${process.env.REACT_APP_API_KEY}`;
+  
+ 
   const response = await fetch(url);
+  console.log("Fetching URL res:",response);
 
-  console.log("adsa",response);
+  console.log("Response status:", response.status);
   if (!response.ok) {
-    const message = `An error has occured: ${response.status}`;
+    const message = `An error has occurred: ${response.status}`;
     throw new Error(message);
   }
 
   return await response.json();
 };
+
